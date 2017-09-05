@@ -1,0 +1,21 @@
+version: "2"
+services:
+  wpdb:
+    image: mariadb
+    container_name: database
+    ports:
+      - "8031:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: ag#sun#1
+  wp:
+    image: wordpress
+    container_name: wordpress
+    volumes:
+      - ./wordpress:/var/www/html
+      - ./wp-content:/var/www/html/wp-content:rw
+    ports:
+      - "8080:80"
+    links:
+      - wpdb:mysql
+    environment:
+      WORDPRESS_DB_PASSWORD: ag#sun#1
